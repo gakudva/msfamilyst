@@ -36,7 +36,7 @@ def test_blockcontent():
 
     #Select the Family member by name
     element = wait.until(EC.presence_of_element_located((By.XPATH,"//img[@alt='Family member name']"))) # <- replace with Family member name as it appears on website
-    element = wait.until(EC.element_to_be_clickable((By.XPATH,"//img[@alt='amily member name']")))      # <- replace with Family member name as it appears on website 
+    element = wait.until(EC.element_to_be_clickable((By.XPATH,"//img[@alt='Family member name']")))     # <- replace with Family member name as it appears on website 
     element.click()
 
     #Select Screen time
