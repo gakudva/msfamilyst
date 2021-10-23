@@ -63,12 +63,19 @@ def test_blockcontent():
     #Simply click outside to escape the dropdown
     driver.find_element_by_xpath("//body").click()
 
+    element = driver.find_element(By.XPATH, "//span[contains(text(),'Select a "\
+            "time limit for how long they can use them')]")
+    size = element.size
+    width = size['width']
+    slider_offset = -1 * (width / 2)
+
     #Reduce the time to zero
     element = wait.until(EC.presence_of_element_located((By.XPATH,"//body/div[4"\
             "]/div[1]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div[1]/"\
             "div[1]/div[1]/div[1]/div[1]/div[1]/span[1]")))
     action = ActionChains(driver)
-    action.click_and_hold(element).move_by_offset(-400, 0).release().perform()
+    action.click_and_hold(element).move_by_offset(slider_offset, 0).release().perform()
+    sys.stdout.write("\n" + "The slider was moved by an offset of " + str(slider_offset))
 
     #Hit Done
     element = wait.until(EC.presence_of_element_located((By.XPATH,"//body[1]/di"\
@@ -90,7 +97,7 @@ def test_blockcontent():
     block_app("whatsapp", driver, wait)
     # ... add more apps that need to be blocked
 
-    sys.stderr.write("Success")
+    sys.stdout.write("\n" + "Content blocking successful")
     driver.close()
 
 #Search the app by name and block it
@@ -111,7 +118,7 @@ def block_app(name, driver, wait):
         element = driver.find_element(By.XPATH,"//*[text()='Block app']")
         element.click()
     except NoSuchElementException as exception:
-        print("App " + name + " already blocked")
+        sys.stdout.write("\n" + "App " + name + " already blocked")
 
 
     element = wait.until(EC.presence_of_element_located((By.XPATH,"//*[text()='To apps and games']")))
