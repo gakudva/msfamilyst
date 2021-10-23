@@ -82,7 +82,7 @@ def test_blockcontent():
             "v[4]/div[1]/div[1]/div[1]/div[2]/div[2]/div[3]/div[1]/div[1]/div["\
             "1]/span[1]/button[1]/span[1]/span[1]/span[1]")))
     element.click()
-    sys.stdout.write("\n" + "System access was set to zero minutes")
+    sys.stdout.write("\n" + "Screen time was set to zero minutes")
 
     #Select App and Games
     element = wait.until(EC.element_to_be_clickable((By.XPATH,"//body/div[@"\
@@ -119,7 +119,7 @@ def block_app(name, driver, wait):
         element = driver.find_element(By.XPATH,"//*[text()='Block app']")
         element.click()
     except NoSuchElementException as exception:
-        sys.stdout.write("\n" + "App " + name + " already blocked")
+        sys.stderr.write("\n" + "App " + name + " already blocked")
 
 
     element = wait.until(EC.presence_of_element_located((By.XPATH,"//*[text()='To apps and games']")))
